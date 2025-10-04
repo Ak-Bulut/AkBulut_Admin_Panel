@@ -6,6 +6,7 @@ class AttendanceRecord {
   final DateTime createTime;
   final EventType type;
   final String? snapshotUrl; // Resim URL'si olabilir
+  final String? roomNumber;
 
   AttendanceRecord({
     required this.userId,
@@ -13,5 +14,6 @@ class AttendanceRecord {
     required this.createTime,
     required this.type,
     this.snapshotUrl,
+    this.roomNumber,
   });
 }

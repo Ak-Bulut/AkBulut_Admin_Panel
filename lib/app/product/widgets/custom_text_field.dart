@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:get/utils.dart';
 import 'package:akbulut_admin/app/product/init/packages.dart';
 
@@ -41,7 +42,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       width: MediaQuery.of(context).size.width,
       padding: context.padding.onlyTopNormal,
       child: TextFormField(
-        style: context.general.textTheme.bodyLarge!.copyWith(color: widget.enabled == false ? ColorConstants.greyColor : ColorConstants.blackColor, fontSize: 16.sp, fontWeight: FontWeight.w600),
+        style: context.general.textTheme.bodyLarge!.copyWith(color: widget.enabled == false ? ColorConstants.greyColor : ColorConstants.blackColor, fontSize: 16, fontWeight: FontWeight.w600),
         enabled: widget.enabled ?? true,
         controller: widget.controller,
         onTap: widget.onTap,
@@ -72,7 +73,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   ),
                 ),
           labelText: widget.labelName.tr,
-          labelStyle: context.general.textTheme.bodyLarge!.copyWith(color: ColorConstants.greyColor, fontSize: 16.sp, fontWeight: FontWeight.w500),
+          labelStyle: context.general.textTheme.bodyLarge!.copyWith(color: ColorConstants.greyColor, fontSize: 16, fontWeight: FontWeight.w500),
           floatingLabelAlignment: FloatingLabelAlignment.start,
           contentPadding: context.padding.normal,
           isDense: true,

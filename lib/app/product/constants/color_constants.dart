@@ -6,8 +6,8 @@ class ColorConstants {
   static const Color whiteColor = Colors.white;
   static const Color blackColor = Colors.black;
   static const Color greyColor = Colors.grey;
-  static const Color kPrimaryColor = Color(0xff0a529e);
-  static const Color kPrimaryColor2 = Color(0xff6366f1);
+  static const Color kPrimaryColor = Color(0xff1946bb);
+  static const Color kPrimaryColor2 = Color(0xff187bff);
 
   static const Color blueColorwithOpacity = Color(0xffcde7fc);
   static const Color greenColor = Color(0xff3ead2c);

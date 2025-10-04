@@ -1,18 +1,23 @@
 import 'package:akbulut_admin/app/data/models/attendence_record.dart';
-import 'package:get/get.dart';
-
-enum EmployeeStatus { atWork, notAtWork, unknown }
+import 'package:akbulut_admin/app/data/models/daily_status.dart';
+import 'package:collection/collection.dart';
 
 class Employee {
   final String userId;
   final String name;
-  final Rx<EmployeeStatus> status = EmployeeStatus.unknown.obs;
-  final List<AttendanceRecord> records;
-  String? get imageUrl => records.firstWhereOrNull((r) => r.snapshotUrl != null)?.snapshotUrl;
+  final String? imageUrl;
+  final List<DailyStatus> dailyStatuses;
+  final Duration totalWorkDuration;
+  bool isCurrentlyAtWork;
+  final double successRate;
 
   Employee({
     required this.userId,
     required this.name,
-    this.records = const [],
+    this.imageUrl,
+    required this.dailyStatuses,
+    required this.totalWorkDuration,
+    this.isCurrentlyAtWork = false,
+    required this.successRate,
   });
 }

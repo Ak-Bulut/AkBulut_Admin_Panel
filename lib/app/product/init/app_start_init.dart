@@ -22,7 +22,6 @@ class AppStartInit {
 
   static Future<void> init() async {
     WidgetsFlutterBinding.ensureInitialized();
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     HttpOverrides.global = HttpOverridesCustom();
     await GetStorage.init();
   }

@@ -98,7 +98,7 @@ class _ListviewTopTextState<T> extends State<ListviewTopText<T>> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border(bottom: BorderSide(color: Colors.grey.shade300, width: 1.5)),
@@ -118,16 +118,16 @@ class _ListviewTopTextState<T> extends State<ListviewTopText<T>> {
                       Flexible(
                         child: Text(
                           "${widget.names[i]['name']!}".tr,
-                          style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600, color: Colors.black),
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       if (_currentSortIndex == i)
                         Padding(
-                          padding: EdgeInsets.only(left: 4.w),
+                          padding: EdgeInsets.only(left: 4),
                           child: Icon(
                             sortStates[i] ? Icons.arrow_upward : Icons.arrow_downward,
-                            size: 16.sp,
+                            size: 16,
                             color: Colors.black54,
                           ),
                         ),

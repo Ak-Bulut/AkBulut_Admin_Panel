@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:akbulut_admin/app/product/constants/string_constants.dart';
 import 'package:akbulut_admin/app/product/init/packages.dart';
+import 'package:lottie/lottie.dart';
 
 class CustomWidgets {
   static Center spinKit() {
@@ -18,7 +19,7 @@ class CustomWidgets {
         child: Text(
       'noImage'.tr,
       textAlign: TextAlign.center,
-      style: TextStyle(color: Colors.white, fontSize: 25.sp),
+      style: TextStyle(color: Colors.white, fontSize: 25),
     ));
   }
 
@@ -33,7 +34,7 @@ class CustomWidgets {
     return Center(
         child: Text(
       "noProduct".tr,
-      style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 20.sp),
+      style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 20),
     ));
   }
 
@@ -93,38 +94,13 @@ class CustomWidgets {
 
   static Widget counter(int index) {
     return Container(
-      width: 40.w,
-      padding: EdgeInsets.only(right: 10.w),
+      width: 40,
+      padding: EdgeInsets.only(right: 10),
       alignment: Alignment.center,
       child: Text(
         index.toString(),
-        style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16.sp),
+        style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
       ),
-    );
-  }
-
-  static Widget imageWidget(String? url, {bool fit = false, int? cacheWidth, int? cacheHeight}) {
-    return CachedNetworkImage(
-      imageUrl: url!,
-      // Bellekte yeniden boyutlama için:
-      memCacheWidth: cacheWidth ?? 200, // örneğin 200px genişlik
-      memCacheHeight: cacheHeight ?? 200, // örneğin 200px yükseklik
-      imageBuilder: (context, imageProvider) => Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          image: DecorationImage(
-            image: imageProvider,
-            fit: fit ? null : BoxFit.cover,
-          ),
-        ),
-      ),
-      placeholder: (context, url) => Center(
-          child: SizedBox(
-        width: 30,
-        height: 30,
-        child: CircularProgressIndicator(strokeWidth: 2),
-      )),
-      errorWidget: (context, url, error) => Icon(IconlyLight.infoSquare),
     );
   }
 }

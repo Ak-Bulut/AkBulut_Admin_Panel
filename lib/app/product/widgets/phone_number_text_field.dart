@@ -1,5 +1,6 @@
 // ignore_for_file: file_names, must_be_immutable, use_key_in_widget_constructors
 
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:akbulut_admin/app/product/init/packages.dart';
 
@@ -15,10 +16,10 @@ class PhoneNumberTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 15.h),
+      padding: EdgeInsets.only(top: 15),
       child: TextFormField(
         enabled: disabled ?? true,
-        style: TextStyle(color: Colors.black, fontSize: 18.sp, fontWeight: FontWeight.w600),
+        style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w600),
         cursorColor: Colors.black,
         textInputAction: TextInputAction.next,
         keyboardType: TextInputType.number,
@@ -53,7 +54,7 @@ class PhoneNumberTextField extends StatelessWidget {
                     '+ 993',
                     style: TextStyle(
                       color: Colors.grey,
-                      fontSize: 18.sp,
+                      fontSize: 18,
                     ),
                   ),
                 ),
