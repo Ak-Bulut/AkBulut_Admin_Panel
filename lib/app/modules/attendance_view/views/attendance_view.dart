@@ -22,6 +22,8 @@ class AttendanceView extends StatelessWidget {
           'attendance_control'.tr,
           style: TextStyle(fontWeight: FontWeight.bold, color: ColorConstants.kPrimaryColor),
         ),
+        shadowColor: Colors.transparent,
+        foregroundColor: Colors.transparent,
         backgroundColor: ColorConstants.kPrimaryColor2.withOpacity(0.05),
         elevation: 0,
         actions: [

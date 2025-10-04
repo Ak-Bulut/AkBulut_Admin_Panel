@@ -1,4 +1,8 @@
+import 'dart:ui';
+
+import 'package:akbulut_admin/app/modules/products/models/category_model.dart';
 import 'package:akbulut_admin/app/product/init/packages.dart';
+import 'package:akbulut_admin/app/product/widgets/custom_scroll_behavior.dart';
 import 'package:akbulut_admin/app/product/widgets/search_widget.dart';
 import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -18,6 +22,7 @@ class _ProductViewState extends State<ProductView> {
   @override
   void initState() {
     super.initState();
+    controller.fetchCategories();
     controller.fetchProducts();
   }
 
@@ -36,6 +41,7 @@ class _ProductViewState extends State<ProductView> {
               controller.searchController.clear();
             },
           ),
+          _buildCategoryFilter(context),
           Expanded(
             child: Obx(() {
               if (controller.isLoading.value) {
@@ -56,12 +62,83 @@ class _ProductViewState extends State<ProductView> {
     );
   }
 
+  Widget _buildCategoryFilter(BuildContext context) {
+    return Obx(() {
+      if (controller.categoryList.isEmpty) {
+        return const SizedBox.shrink();
+      }
+      return Container(
+        height: 50,
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: ScrollConfiguration(
+          behavior: AppScrollBehavior(),
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: controller.categoryList.length + 1,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: EdgeInsets.only(left: index == 0 ? 16.0 : 4.0, right: 4.0),
+                child: Obx(() {
+                  if (index == 0) {
+                    return _buildCategoryChip(
+                      label: 'all'.tr,
+                      isSelected: controller.selectedCategory.value == null,
+                      onSelected: (_) => controller.selectCategory(null),
+                    );
+                  }
+                  final category = controller.categoryList[index - 1];
+
+                  return _buildCategoryChip(
+                    label: category.name,
+                    isSelected: controller.selectedCategory.value?.id == category.id,
+                    onSelected: (_) => controller.selectCategory(category),
+                  );
+                }),
+              );
+            },
+          ),
+        ),
+      );
+    });
+  }
+
+  Widget _buildCategoryChip({
+    required String label,
+    required bool isSelected,
+    required ValueChanged<bool> onSelected,
+  }) {
+    return ChoiceChip(
+      label: Text(label),
+      selected: isSelected,
+      onSelected: onSelected,
+      selectedColor: ColorConstants.kPrimaryColor2,
+      backgroundColor: ColorConstants.whiteColor,
+      shadowColor: Colors.transparent,
+      surfaceTintColor: Colors.transparent,
+      labelStyle: TextStyle(
+        color: isSelected ? ColorConstants.whiteColor : ColorConstants.greyColor,
+        fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
+      ),
+      side: BorderSide(
+        color: isSelected ? Colors.transparent : ColorConstants.greyColor.withOpacity(0.4),
+        width: 1.5,
+      ),
+      showCheckmark: false,
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+    );
+  }
+
   AppBar _appBar() {
     return AppBar(
       title: Text(
-        'products'.tr,
+        'products_view'.tr,
         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24, color: ColorConstants.blackColor),
       ),
+      shadowColor: Colors.transparent,
+      foregroundColor: Colors.transparent,
       backgroundColor: ColorConstants.kPrimaryColor2.withOpacity(0.05),
       elevation: 0,
       actions: [
@@ -130,19 +207,30 @@ class _ProductViewState extends State<ProductView> {
   }
 
   Widget _buildProductListCard(ProductController controller, ProductModel product) {
-    return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
-      elevation: 1,
-      color: Colors.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      child: Padding(
+    return GestureDetector(
+      onTap: () {
+        controller.showProductDetailsDialog(product);
+      },
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), color: Colors.white, border: Border.all(color: Colors.grey.shade200), boxShadow: [
+          BoxShadow(
+            color: Colors.grey.shade200,
+            offset: const Offset(0, 2),
+            blurRadius: 4,
+          )
+        ]),
         padding: const EdgeInsets.all(12.0),
         child: Row(
           children: [
-            // Image
-            SizedBox(
+            Container(
               width: 80,
               height: 80,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                color: Colors.grey.shade200,
+                border: Border.all(color: Colors.grey.shade200),
+              ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: product.imageUrls.isNotEmpty
@@ -155,14 +243,13 @@ class _ProductViewState extends State<ProductView> {
               ),
             ),
             const SizedBox(width: 16),
-            // Details
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(product.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                   const SizedBox(height: 4),
-                  Text(product.category, style: TextStyle(fontSize: 12, color: Colors.grey.shade600)),
+                  Text(product.category?.name ?? 'no_category'.tr, style: TextStyle(fontSize: 12, color: Colors.grey.shade600)),
                   const SizedBox(height: 8),
                   Text(
                     product.description,
@@ -174,9 +261,8 @@ class _ProductViewState extends State<ProductView> {
               ),
             ),
             const SizedBox(width: 16),
-            // Stock & Price
             SizedBox(
-              width: 150, // Fixed width for alignment
+              width: 150,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
@@ -185,12 +271,10 @@ class _ProductViewState extends State<ProductView> {
                     style: TextStyle(fontWeight: FontWeight.bold, color: ColorConstants.kPrimaryColor, fontSize: 18),
                   ),
                   const SizedBox(height: 8),
-                  _buildStockIndicator(product.stockLeft),
+                  _buildStockIndicator(product.stockLeft, isSmall: true),
                 ],
               ),
             ),
-            // Actions
-            _buildActionMenu(controller, product),
           ],
         ),
       ),
@@ -200,7 +284,7 @@ class _ProductViewState extends State<ProductView> {
   Widget _buildProductGridCard(ProductController controller, ProductModel product) {
     return GestureDetector(
       onTap: () {
-        controller.showProductDetails(product);
+        controller.showProductDetailsDialog(product);
       },
       child: Card(
         elevation: 1,
@@ -222,14 +306,18 @@ class _ProductViewState extends State<ProductView> {
                     : const Center(child: Icon(Icons.image_not_supported, size: 40)),
               ),
             ),
-            Padding(
+            Container(
+              decoration: BoxDecoration(
+                  border: Border(
+                top: BorderSide(color: ColorConstants.blackColor.withOpacity(0.1)),
+              )),
               padding: const EdgeInsets.all(12.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(product.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16), maxLines: 1, overflow: TextOverflow.ellipsis),
                   const SizedBox(height: 4),
-                  Text(product.category, style: TextStyle(color: Colors.grey.shade600, fontSize: 12)),
+                  Text(product.category?.name.toString() ?? 'no_category'.tr, style: TextStyle(color: Colors.grey.shade600, fontSize: 12)),
                   const SizedBox(height: 8),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -249,57 +337,43 @@ class _ProductViewState extends State<ProductView> {
 
   Widget _buildStockIndicator(int stock, {bool isSmall = false}) {
     Color color;
-    String text;
     if (stock > 50) {
       color = Colors.green.shade700;
-      text = 'in_stock'.trParams({'stock': stock.toString()});
     } else if (stock > 0) {
       color = Colors.orange.shade700;
-      text = 'low_stock'.trParams({'stock': stock.toString()});
     } else {
       color = Colors.red.shade700;
-      text = 'out_of_stock'.tr;
     }
+    final text = 'stock_count'.tr.replaceAll('@stock', stock.toString());
 
     return Container(
       padding: EdgeInsets.symmetric(horizontal: isSmall ? 6 : 8, vertical: isSmall ? 2 : 4),
       decoration: BoxDecoration(
         color: color.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(4),
       ),
       child: Text(
         text,
         style: TextStyle(
           color: color,
           fontWeight: FontWeight.bold,
-          fontSize: isSmall ? 10 : 12,
+          fontSize: isSmall ? 14 : 16,
         ),
       ),
     );
   }
+}
 
-  Widget _buildActionMenu(ProductController controller, ProductModel product) {
-    return PopupMenuButton<String>(
-      onSelected: (value) {
-        if (value == 'view') {
-        } else if (value == 'edit') {
-        } else if (value == 'delete') {}
-      },
-      icon: Icon(Icons.more_vert, color: Colors.grey.shade600),
-      itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-        PopupMenuItem<String>(
-          value: 'view',
-          child: ListTile(leading: const Icon(HugeIcons.strokeRoundedView), title: Text('view_details'.tr)),
-        ),
-        PopupMenuItem<String>(
-          value: 'edit',
-          child: ListTile(leading: const Icon(HugeIcons.strokeRoundedEdit01), title: Text('edit_product'.tr)),
-        ),
-        PopupMenuItem<String>(
-          value: 'delete',
-          child: ListTile(leading: const Icon(HugeIcons.strokeRoundedDelete01, color: Colors.red), title: Text('delete'.tr, style: const TextStyle(color: Colors.red))),
-        ),
-      ],
-    );
+class AppScrollBehavior extends ScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.stylus,
+        PointerDeviceKind.mouse,
+      };
+
+  @override
+  Widget buildScrollbar(BuildContext context, Widget child, ScrollableDetails details) {
+    return child;
   }
 }

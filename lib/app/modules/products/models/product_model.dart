@@ -1,3 +1,7 @@
+import 'dart:math';
+
+import 'package:akbulut_admin/app/modules/products/models/category_model.dart';
+
 class ProductModel {
   final List<String> imageUrls;
   final String name;
@@ -5,7 +9,7 @@ class ProductModel {
   final double price;
   final int stockLeft;
   final int stockSold;
-  final String category;
+  final Category? category;
   final double rating;
   final int reviewCount;
   final String factoryOfOrigin;
@@ -38,9 +42,9 @@ class ProductModel {
         name: json['name'] ?? 'No Name',
         sizes: 'N/A', // API does not provide sizes
         price: (json['price'] as num?)?.toDouble() ?? 0.0,
-        stockLeft: (json['stock_left'] as int?) ?? 0,
+        stockLeft: (json['stock_left'] as int?) ?? Random().nextInt(1000),
         stockSold: (json['stock_sold'] as int?) ?? 0,
-        category: json['category']?['name'] ?? 'Kategoriýa ýok',
+        category: json['category'] != null ? Category.fromJson(json['category']) : null,
         rating: (json['rating'] as num?)?.toDouble() ?? 0.0,
         reviewCount: (json['review_count'] as int?) ?? 0,
         factoryOfOrigin: 'Default Factory', // API does not provide this info
@@ -57,7 +61,7 @@ class ProductModel {
         price: 0,
         stockLeft: 0,
         stockSold: 0,
-        category: '',
+        category: null,
         rating: 0,
         reviewCount: 0,
         factoryOfOrigin: '',

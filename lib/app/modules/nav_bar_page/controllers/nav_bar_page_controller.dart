@@ -27,7 +27,6 @@ class NavBarPageController extends GetxController {
     PurchasesView(),
     ExpencesView(),
     AttendanceView(),
-    LogsView(),
   ];
 
   final List<IconData> _adminIcons = [
@@ -37,10 +36,9 @@ class NavBarPageController extends GetxController {
     CupertinoIcons.cart_badge_plus,
     IconlyLight.wallet,
     IconlyLight.user3,
-    IconlyLight.document,
   ];
 
-  final List<String> _adminTitles = ['home', 'products', 'sales', 'purchases', 'expences', 'workers', 'logs'];
+  final List<String> _adminTitles = ['home', 'products', 'sales', 'purchases', 'expences', 'workers'];
 
   final List<Widget> _kadrPages = [AttendanceView()];
   final List<IconData> _kadrIcons = [IconlyLight.user3];
@@ -52,7 +50,6 @@ class NavBarPageController extends GetxController {
     SalesView(),
     PurchasesView(),
     ExpencesView(),
-    LogsView(),
   ];
 
   final List<IconData> _satysIcons = [
@@ -61,10 +58,9 @@ class NavBarPageController extends GetxController {
     IconlyLight.paper,
     CupertinoIcons.cart_badge_plus,
     IconlyLight.wallet,
-    IconlyLight.document,
   ];
 
-  final List<String> _satysTitles = ['home', 'products', 'sales', 'purchases', 'expences', 'logs'];
+  final List<String> _satysTitles = ['home', 'products', 'sales', 'purchases', 'expences'];
 
   @override
   void onInit() {
@@ -101,8 +97,7 @@ class NavBarPageController extends GetxController {
 
   void changeFactoryLocation(String location) {
     selectedFactoryLocation.value = location;
-    // Here you would typically refetch data based on the new location.
-    // For now, we just update the value.
+
     update();
   }
 

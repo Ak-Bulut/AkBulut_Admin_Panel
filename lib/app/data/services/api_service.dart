@@ -5,14 +5,18 @@ import '../../modules/products/models/product_model.dart';
 class ApiService {
   static const String _baseUrl = 'https://akbulut.com.tm/api/';
 
-  Future<List<ProductModel>> getProducts() async {
+  Future<List<ProductModel>> getProducts({int? categoryId}) async {
     final List<ProductModel> allProducts = [];
     int page = 1;
     bool hasMore = true;
 
     while (hasMore) {
       try {
-        final response = await http.get(Uri.parse('${_baseUrl}products?page=$page'));
+        String url = '${_baseUrl}products?page=$page';
+        if (categoryId != null) {
+          url += '&category_id=$categoryId';
+        }
+        final response = await http.get(Uri.parse(url));
 
         if (response.statusCode == 200) {
           final dynamic responseData = json.decode(response.body);

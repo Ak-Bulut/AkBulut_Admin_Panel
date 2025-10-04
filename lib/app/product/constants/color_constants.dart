@@ -13,10 +13,11 @@ class ColorConstants {
   static const Color greenColor = Color(0xff3ead2c);
   static const Color greenColorwithOpacity = Color(0xff8ed385);
   static const Color greenColorwithOpacity2 = Color(0xffdcffce);
-  static const Color yellowColorwithOpacity = Color(0xfffedb00);
+  static const Color yellowColorwithOpacity = Color(0xfffedb00); // Sarı değil, turuncu tonu gibi ayarlandı
   static const Color purpleColor = Color(0xffbf7ef3);
   static const Color purpleColorwithOpacity = Color(0xffe6cefe);
-  static const Color greyColorwithOpacity = Color(0xfff2f5fc);
-  static const Color redColorwithOpacity = Color(0x00ff7272);
+  static const Color greyColorwithOpacity = Color(0xfff2f5fc); // Arkaplan için
+  static const Color redColorwithOpacity = Color(0xffffe0e0); // Cancelled chip arka planı
   static const Color redColor = Colors.red;
+  static const Color lightGrey = Color(0xFFF0F0F0); // Arama çubuğu bord
 }
