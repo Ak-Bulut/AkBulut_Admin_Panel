@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:akbulut_admin/app/modules/login_view/views/login_view.dart';
 import 'package:akbulut_admin/app/modules/nav_bar_page/views/nav_bar_page_view.dart';
 import 'package:akbulut_admin/app/product/constants/string_constants.dart';
@@ -9,7 +7,8 @@ import 'package:akbulut_admin/app/product/constants/theme_contants.dart';
 import 'package:akbulut_admin/app/product/init/app_start_init.dart';
 import 'package:akbulut_admin/app/product/init/packages.dart';
 import 'package:akbulut_admin/app/product/init/translations.dart';
-import 'package:get_storage/get_storage.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 Future<void> main() async {
@@ -49,7 +48,7 @@ class _MyApp extends StatelessWidget {
       locale: const Locale('tk', 'TK'),
       translations: translations,
       defaultTransition: Transition.fadeIn,
-      home: LoginView(),
+      home: token == null ? LoginView() : NavBarPageView(),
     );
   }
 }

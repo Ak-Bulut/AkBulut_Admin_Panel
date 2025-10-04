@@ -9,8 +9,6 @@ import 'package:get/get.dart';
 
 import 'package:flutter/cupertino.dart';
 
-
-
 class NavBarPageView extends GetView<NavBarPageController> {
   @override
   final NavBarPageController controller = Get.put(NavBarPageController());
@@ -61,27 +59,28 @@ class _DrawerView extends GetView<NavBarPageController> {
         ),
         Expanded(
           flex: 17,
-                        child: SingleChildScrollView(
-                      child: Column(
-                        children: List.generate(controller.pages.length, (index) {
-                          final isSelected = controller.selectedIndex.value == index;
-                          final icon = controller.icons[index];
-                          final title = controller.titles[index];
-          
-                          return Obx(() => DrawerButtonMine(
-                                onTap: () {
-                                  controller.selectedIndex.value = index;
-                                },
-                                index: index,
-                                selectedIndex: controller.selectedIndex.value,
-                                showIconOnly: isCollapsed,
-                                icon: icon,
-                                title: title,
-                                isCollapsed: MediaQuery.of(context).size.width < 600 ? true : false,
-                              ));
-                        }),
-                      ),
-                    ),        ),
+          child: SingleChildScrollView(
+            child: Column(
+              children: List.generate(controller.pages.length, (index) {
+                final isSelected = controller.selectedIndex.value == index;
+                final icon = controller.icons[index];
+                final title = controller.titles[index];
+
+                return Obx(() => DrawerButtonMine(
+                      onTap: () {
+                        controller.selectedIndex.value = index;
+                      },
+                      index: index,
+                      selectedIndex: controller.selectedIndex.value,
+                      showIconOnly: isCollapsed,
+                      icon: icon,
+                      title: title,
+                      isCollapsed: MediaQuery.of(context).size.width < 600 ? true : false,
+                    ));
+              }),
+            ),
+          ),
+        ),
         const Spacer(),
         FactoryLocationButton(),
         LanguageButton(),

@@ -3,19 +3,12 @@ import 'package:akbulut_admin/app/modules/attendance_view/views/attendance_view.
 import 'package:akbulut_admin/app/modules/expences/views/expences_view.dart';
 import 'package:akbulut_admin/app/modules/home/views/home_view.dart';
 import 'package:akbulut_admin/app/modules/logs/views/logs_view.dart';
-import 'package:akbulut_admin/app/modules/login_view/views/login_view.dart';
 import 'package:akbulut_admin/app/modules/products/views/products_view.dart';
 import 'package:akbulut_admin/app/modules/purchases/views/purchases_view.dart';
 import 'package:akbulut_admin/app/modules/sales/views/sales_view.dart';
-import 'package:akbulut_admin/app/product/constants/string_constants.dart';
 import 'package:akbulut_admin/app/product/init/packages.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-
-import 'package:akbulut_admin/app/modules/home/bindings/home_binding.dart';
-import 'package:akbulut_admin/app/modules/home/controllers/home_controller.dart';
 
 class NavBarPageController extends GetxController {
   final RxInt selectedIndex = 0.obs;
@@ -29,7 +22,7 @@ class NavBarPageController extends GetxController {
 
   final List<Widget> _adminPages = [
     HomeView(),
-    ProductsView(),
+    ProductView(),
     SalesView(),
     PurchasesView(),
     ExpencesView(),
@@ -55,7 +48,7 @@ class NavBarPageController extends GetxController {
 
   final List<Widget> _satysPages = [
     HomeView(),
-    ProductsView(),
+    ProductView(),
     SalesView(),
     PurchasesView(),
     ExpencesView(),

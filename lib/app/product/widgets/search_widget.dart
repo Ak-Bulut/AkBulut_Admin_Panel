@@ -11,31 +11,36 @@ class SearchWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: context.padding.low,
-      child: Card(
-        elevation: 0,
-        color: Colors.white54.withOpacity(0.05),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15), side: BorderSide(color: ColorConstants.blackColor.withOpacity(0.1))),
-        child: ListTile(
-          leading: const Icon(
-            IconlyLight.search,
-            color: Colors.black,
-          ),
-          title: TextField(
-              controller: controller,
-              style: TextStyle(color: ColorConstants.blackColor, fontSize: 16, fontWeight: FontWeight.w600),
-              decoration: InputDecoration(hintText: 'search'.tr, hintStyle: TextStyle(color: ColorConstants.greyColor, fontSize: 14), border: InputBorder.none),
-              onChanged: onChanged),
-          contentPadding: EdgeInsets.only(left: 15),
-          trailing: Padding(
-            padding: const EdgeInsets.only(right: 10),
-            child: IconButton(
-                icon: Icon(
-                  CupertinoIcons.xmark_circle,
-                  color: ColorConstants.greyColor,
-                ),
-                onPressed: onClear),
-          ),
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+      child: ListTile(
+        leading: const Icon(
+          IconlyLight.search,
+          color: Colors.black,
+        ),
+        minTileHeight: 50,
+        title: TextField(
+            controller: controller,
+            style: TextStyle(color: ColorConstants.blackColor, fontSize: 16, fontWeight: FontWeight.w600),
+            decoration: InputDecoration(
+                hintText: 'search'.tr,
+                isDense: true,
+                contentPadding: const EdgeInsets.symmetric(vertical: 12.0), // İç dikey boşluğu ayarlar
+                hintStyle: TextStyle(color: ColorConstants.greyColor, fontSize: 14),
+                border: InputBorder.none),
+            onChanged: onChanged),
+        contentPadding: EdgeInsets.only(left: 15, top: 0, bottom: 0),
+        shape: RoundedRectangleBorder(
+          side: BorderSide(color: ColorConstants.greyColor.withOpacity(0.3)),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        trailing: Padding(
+          padding: const EdgeInsets.only(right: 10),
+          child: IconButton(
+              icon: Icon(
+                CupertinoIcons.xmark_circle,
+                color: ColorConstants.greyColor,
+              ),
+              onPressed: onClear),
         ),
       ),
     );

@@ -53,5 +53,21 @@
   "work_hours_graph": "График рабочих часов",
   "total_employees": "Всего сотрудников",
   "dashboard": "Панель управления",
-  "welcome_back": "С возвращением"
+  "welcome_back": "С возвращением",
+  "add_product": "Добавить продукт",
+  "error_loading_products": "Ошибка загрузки продуктов.",
+  "no_products_found": "Продукты не найдены.",
+  "in_stock": "{stock} в наличии",
+  "low_stock": "{stock} мало на складе",
+  "out_of_stock": "Нет в наличии",
+  "view_details": "Посмотреть детали",
+  "edit_product": "Редактировать продукт",
+  "delete": "Удалить",
+  "description": "Описание",
+  "price": "Цена",
+  "stock_left": "Остаток на складе",
+  "stock_sold": "Продано",
+  "factory_of_origin": "Место производства",
+  "last_sale_destination": "Последнее место продажи",
+  "close": "Закрыть"
 }

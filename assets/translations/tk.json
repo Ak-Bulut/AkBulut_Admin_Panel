@@ -44,7 +44,6 @@
   "change_factory_location": "Zawody üýtgetmek",
   "factory1": "Dostluk",
   "factory2": "Zawod 2",
-
   "main_office": "Baş ofis",
   "all": "Hemmesi",
   "view_graph": "Grafigi gör",
@@ -54,5 +53,21 @@
   "work_hours_graph": "Iş sagatlarynyň grafigi",
   "total_employees": "Jemi işgär",
   "dashboard": "Dolandyryş paneli",
-  "welcome_back": "Hoş geldiňiz"
+  "welcome_back": "Hoş geldiňiz",
+  "add_product": "Ürün Ekle",
+  "error_loading_products": "Ürünler yüklenirken hata oluştu.",
+  "no_products_found": "Ürün bulunamadı.",
+  "in_stock": "{stock} stokta",
+  "low_stock": "{stock} az stok",
+  "out_of_stock": "Stokta yok",
+  "view_details": "Detayları Görüntüle",
+  "edit_product": "Ürünü Düzenle",
+  "delete": "Sil",
+  "description": "Açıklama",
+  "price": "Fiyat",
+  "stock_left": "Kalan Stok",
+  "stock_sold": "Satılan Stok",
+  "factory_of_origin": "Üretim Yeri",
+  "last_sale_destination": "Son Satış Yeri",
+  "close": "Kapat"
 }

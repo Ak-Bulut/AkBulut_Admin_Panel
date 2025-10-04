@@ -1,24 +1,58 @@
-import 'package:akbulut_admin/app/data/models/employee.dart';
+import 'package:akbulut_admin/app/data/models/attendence_record.dart';
 import 'package:akbulut_admin/app/data/services/dahua_service.dart';
-import 'package:get/get.dart';
 import 'package:collection/collection.dart';
-
-import '../../../data/models/attendence_record.dart';
+import 'package:fl_chart/fl_chart.dart';
+import 'package:get/get.dart';
 
 class HomeController extends GetxController {
+  // --- SİZİN MEVCUT KODUNUZ (DOKUNULMADI) ---
   final DahuaService _dahuaService = DahuaService();
-
   var isLoading = true.obs;
-  var totalEmployees = 0.obs;
+  var totalEmployees = 0.obs; // Bu, "Total User" kartında kullanılacak
   var employeesAtWork = 0.obs;
   var attendanceHistory = <int>[].obs;
+
+  // --- YENİ TASARIM İÇİN EKLENEN VERİLER ---
+  // Diğer kartlar için örnek veriler
+  final RxString totalOrder = "10,293".obs;
+  final RxString totalSales = "\$89,000".obs;
+
+  // Kartlardaki yüzde değişim verileri
+  final RxString userChange = "+8.5%".obs;
+  final RxString orderChange = "+1.3%".obs;
+  final RxString salesChange = "-4.3%".obs;
+  final RxString pendingChange = "+1.8%".obs;
+
+  final RxString userChangeText = "Up from yesterday".obs;
+  final RxString orderChangeText = "Up from past week".obs;
+  final RxString salesChangeText = "Down from yesterday".obs;
+  final RxString pendingChangeText = "Up from yesterday".obs;
+
+  // Satış Detayları grafiği için örnek veri noktaları
+  final List<FlSpot> salesSpots = [
+    const FlSpot(5, 25),
+    const FlSpot(10, 35),
+    const FlSpot(12, 42),
+    const FlSpot(15, 30),
+    const FlSpot(18, 45),
+    const FlSpot(22, 72),
+    const FlSpot(25, 55),
+    const FlSpot(30, 60),
+    const FlSpot(35, 40),
+    const FlSpot(40, 65),
+    const FlSpot(45, 60),
+    const FlSpot(50, 55),
+    const FlSpot(55, 58),
+    const FlSpot(60, 52),
+  ];
 
   @override
   void onInit() {
     super.onInit();
-    fetchAttendanceData();
+    fetchAttendanceData(); // Sizin veri çekme fonksiyonunuz çağrılıyor
   }
 
+  // --- SİZİN MEVCUT FONKSİYONUNUZ (DOKUNULMADI) ---
   Future<void> fetchAttendanceData() async {
     try {
       isLoading.value = true;

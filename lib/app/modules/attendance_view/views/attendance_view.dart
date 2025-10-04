@@ -5,7 +5,6 @@ import 'package:akbulut_admin/app/modules/attendance_view/views/attendance_chart
 import 'package:akbulut_admin/app/product/extensions/string_extensions.dart';
 import 'package:akbulut_admin/app/product/init/packages.dart';
 import 'package:akbulut_admin/app/product/widgets/search_widget.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:intl/intl.dart';
@@ -24,7 +23,7 @@ class AttendanceView extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.bold, color: ColorConstants.kPrimaryColor),
         ),
         backgroundColor: ColorConstants.kPrimaryColor2.withOpacity(0.05),
-        elevation: 1,
+        elevation: 0,
         actions: [
           _buildDateFilterMenu(),
           const SizedBox(width: 10),
