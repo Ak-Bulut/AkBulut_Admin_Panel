@@ -1,10 +1,12 @@
 
 import 'dart:convert';
+import 'package:akbulut_admin/app/product/constants/api_constants.dart';
 import 'package:http/http.dart' as http;
 import '../../modules/products/models/category_model.dart';
 
 class CategoryService {
-  static const String _baseUrl = 'https://akbulut.com.tm/api/';
+  static const String _baseUrl = ApiConstants.proxyApiBaseUrl;
+
 
   Future<List<Category>> getCategories() async {
     try {

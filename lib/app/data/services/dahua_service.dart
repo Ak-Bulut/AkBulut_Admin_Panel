@@ -1,18 +1,17 @@
 import 'dart:async';
 
 import 'package:akbulut_admin/app/data/models/attendence_record.dart';
+import 'package:akbulut_admin/app/product/constants/api_constants.dart';
 import 'package:http/http.dart' as http;
 
 class DahuaService {
-  static const String _baseUrl = 'http://95.85.117.158:3000';
-
   final String _path = "/api/records";
 
   Future<List<AttendanceRecord>> fetchAttendanceRecords(DateTime startTime, DateTime endTime) async {
     final int startTimestamp = startTime.millisecondsSinceEpoch ~/ 1000;
     final int endTimestamp = endTime.millisecondsSinceEpoch ~/ 1000;
 
-    final url = Uri.parse('$_baseUrl$_path').replace(queryParameters: {
+    final url = Uri.parse('${ApiConstants.serverBaseUrl}$_path').replace(queryParameters: {
       'StartTime': startTimestamp.toString(),
       'EndTime': endTimestamp.toString(),
     });

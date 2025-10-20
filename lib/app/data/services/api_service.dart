@@ -1,9 +1,10 @@
 import 'dart:convert';
+import 'package:akbulut_admin/app/product/init/packages.dart';
 import 'package:http/http.dart' as http;
 import '../../modules/products/models/product_model.dart';
 
 class ApiService {
-  static const String _baseUrl = 'https://akbulut.com.tm/api/';
+  static const String _baseUrl = ApiConstants.proxyApiBaseUrl;
 
   Future<List<ProductModel>> getProducts({int? categoryId}) async {
     final List<ProductModel> allProducts = [];

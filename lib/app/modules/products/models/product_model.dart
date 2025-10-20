@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:akbulut_admin/app/modules/products/models/category_model.dart';
+import 'package:akbulut_admin/app/product/init/packages.dart';
 
 class ProductModel {
   final List<String> imageUrls;
@@ -33,12 +34,19 @@ class ProductModel {
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     try {
-      final String baseUrl = 'https://akbulut.com.tm';
+      final String baseUrl = ApiConstants.proxyImageBaseUrl;
       final String? originalImagePath = json['photos'] != null ? json['photos']['original'] : null;
-      final String fullImageUrl = originalImagePath != null && originalImagePath.startsWith('http') ? originalImagePath : '$baseUrl${originalImagePath ?? ''}';
+
+      String finalImageUrl = '';
+      if (originalImagePath != null) {
+        // Gelen URL'den 'https://akbulut.com.tm' kısmını kaldırır.
+        final relativePath = originalImagePath.replaceFirst(RegExp(r'https?://[^/]+'), '');
+        // Kalan yolu proxy adresimizin sonuna ekler.
+        finalImageUrl = '$baseUrl$relativePath';
+      }
 
       return ProductModel(
-        imageUrls: originalImagePath != null ? [fullImageUrl] : [],
+        imageUrls: originalImagePath != null ? [finalImageUrl] : [],
         name: json['name'] ?? 'No Name',
         sizes: 'N/A', // API does not provide sizes
         price: (json['price'] as num?)?.toDouble() ?? 0.0,

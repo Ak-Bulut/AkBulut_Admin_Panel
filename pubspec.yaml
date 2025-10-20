@@ -3,13 +3,12 @@ version: 1.0.0+1
 publish_to: none
 description: A new Flutter project.
 environment:
-  flutter: ^3.35.0
   sdk: ">=3.3.0 <4.0.0"
+
 dependencies:
   # CORE & FIREBASE
   cupertino_icons: ^1.0.6 
-  flutter_lints: ^6.0.0
-
+  flutter_lints: ^5.0.0
   # STATE MANAGEMENT & UTILITIES
   get: ^4.7.2
   intl: ^0.19.0
@@ -17,17 +16,15 @@ dependencies:
   http: ^1.1.0 
   file_saver: ^0.2.12
   excel: ^4.0.6
-    # UI COMPONENTS & ANIMATIONS
+  # UI COMPONENTS & ANIMATIONS
   omni_datetime_picker: ^2.3.1
   flutter_iconly: ^1.0.2
   hugeicons: ^0.0.11
-
   fl_chart: ^0.68.0         
-  kartal: ^4.2.0
+  kartal: ^4.1.0
   lottie: ^3.0.0
   get_storage: ^2.1.1 
-  flutter_svg: ^2.2.1
-
+  flutter_svg: ^2.1.0
   flutter:
     sdk: flutter
 

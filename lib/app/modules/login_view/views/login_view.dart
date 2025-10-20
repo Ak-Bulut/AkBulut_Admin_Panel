@@ -18,7 +18,7 @@ class LoginView extends StatelessWidget {
     if (_formKey.currentState!.validate()) {
       final box = GetStorage();
       String? role;
-      if (emailController.text == 'akbulut' && passwordController.text == 'akbulut12345') {
+      if (emailController.text == 'akbulut' && passwordController.text == 'akbulut123') {
         role = 'admin';
       } else if (emailController.text == 'kadr' && passwordController.text == 'kadr12345') {
         role = 'kadr';

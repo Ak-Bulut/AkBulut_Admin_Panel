@@ -1,5 +1,9 @@
 class ApiConstants {
-  static const String baseUrl = 'http://216.250.12.49:9000/api/';
-  static const String imageURL = 'http://216.250.12.49:9000/';
-  static const String imageURL2 = 'http://216.250.12.49:9000';
+  static const String serverBaseUrl = 'http://95.85.117.158:3000';
+
+  // Proxy üzerinden API istekleri için tam yol.
+  static const String proxyApiBaseUrl = '$serverBaseUrl/proxy/api/';
+
+  // Proxy üzerinden resim istekleri için temel yol.
+  static const String proxyImageBaseUrl = '$serverBaseUrl/proxy';
 }
